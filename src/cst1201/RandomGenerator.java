@@ -2,31 +2,43 @@ package cst1201;
 
 import java.util.Random;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class RandomGenerator {
 
     public static void main(String[] args) {
-        //TODO: Create a Scanner object to read keyboard input.
+        int max = 0;
+        int sum = 0;
+        int min = 0;
+        double average = 0.0;
+
         Scanner scanner = new Scanner(System.in);
-        
-        //TODO: Ask the user a lower and upper bound.
+
         System.out.print("Enter a lower bound: ");
         int lowerBound = scanner.nextInt();
-        
+
         System.out.print("Enter an upper bound: ");
         int upperBound = scanner.nextInt();
-        
-        //TODO: Ask the user for the number of random integers to generate.
+
         System.out.print("Enter the number of random integers to generate: ");
-        int numberOfInt = scanner.nextInt();
-        
-        //TODO: Generate random integers of the desired length and bound.
+        int count = scanner.nextInt();
+
         Random random = new Random();
-        IntStream intStream = random.ints(numberOfInt, lowerBound, upperBound);
-        
-        System.out.println(intStream);
-        
-        //TODO: Print the average, max, min, count, and sum of the integers.
+
+        for (int i = 0; i < count; i++) {
+            int num = random.nextInt(upperBound - lowerBound) + 1 + lowerBound;
+            System.out.println("The random number generated is: " + num);
+
+            max = num >= max ? num : max;
+            min = num <= min || min == 0 ? num : min;
+            sum += num;
+            average += num;
+        }
+        average = average / count;
+
+        System.out.println("Average: " + average);
+        System.out.println("Max: " + max);
+        System.out.println("Min: " + min);
+        System.out.println("Count: " + count);
+        System.out.println("Sum: " + sum);
     }
 }
